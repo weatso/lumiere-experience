@@ -1,95 +1,37 @@
 @import "tailwindcss";
 
-/* DI TAILWIND V4, KONFIGURASI DILAKUKAN DI SINI (BUKAN DI CONFIG.TS)
-  Blok @theme ini otomatis membuat utility class seperti 'bg-lumiere-base' 
-  atau 'text-lumiere-dark'.
-*/
 @theme {
-  /* Palet Warna Lumiere */
   --color-lumiere-base: #F9F8F4;
   --color-lumiere-dark: #2C2C2C;
   --color-lumiere-grey: #8A8A8A;
   --color-lumiere-gold: #D4AF37;
-
-  /* Font dari Next.js */
   --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
-
-  /* Custom Animations (jika perlu nanti) */
-  --animate-float: float 3s ease-in-out infinite;
 }
 
-/* CUSTOM VARIABLES & UTILITIES 
-  Kita mendefinisikan variabel global dan class kustom di sini.
-*/
-:root {
-  /* Gradient Metallic Gold kita simpan di variabel CSS biasa */
-  --gold-metallic: linear-gradient(135deg, #B88A44 0%, #E5C579 25%, #FFD700 50%, #E5C579 75%, #B88A44 100%);
-}
-
-/* Base Styles */
 @layer base {
-  body {
-    background-color: var(--color-lumiere-base);
-    color: var(--color-lumiere-dark);
-    font-family: var(--font-sans);
+  html {
+    scroll-behavior: smooth;
   }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
+  body {
+    @apply bg-lumiere-base text-lumiere-dark font-sans antialiased;
+    overflow-x: hidden; /* Mencegah scroll samping horizontal */
   }
 }
 
-/* Custom Utility Classes */
 @layer utilities {
-  /* Class text emas berkilau */
   .text-gold-shine {
-    background: var(--gold-metallic);
+    background: linear-gradient(135deg, #B88A44 0%, #E5C579 25%, #FFD700 50%, #E5C579 75%, #B88A44 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
-
-  /* Border Emas */
-  .border-gold-shine {
-    border: 1px solid transparent;
-    background: linear-gradient(var(--color-lumiere-base), var(--color-lumiere-base)) padding-box,
-                var(--gold-metallic) border-box;
-  }
-  
-  /* 3D Helpers */
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-  .transform-style-3d {
-    transform-style: preserve-3d;
-  }
-
+  /* Animasi Marquee */
   @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
-  
   .animate-marquee {
-    animation: marquee 20s linear infinite;
+    animation: marquee 30s linear infinite;
   }
-  
-  /* Supaya Marquee berhenti saat di-hover user */
-  .group:hover .animate-marquee {
-    animation-play-state: paused;
-  }
-}
-
-/* Lenis Scroll Config */
-html.lenis, html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
 }
